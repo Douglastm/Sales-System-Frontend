@@ -4,7 +4,6 @@
 
 /* ── Design Tokens ──────────────────────────────────────── */
 :root {
-  /* Brand */
   --brand-50:  #eef2ff;
   --brand-100: #e0e7ff;
   --brand-200: #c7d2fe;
@@ -13,7 +12,6 @@
   --brand-700: #4338ca;
   --brand-800: #3730a3;
 
-  /* Neutrals */
   --gray-0:   #ffffff;
   --gray-50:  #f8fafc;
   --gray-100: #f1f5f9;
@@ -26,49 +24,35 @@
   --gray-800: #1e293b;
   --gray-900: #0f172a;
 
-  /* Semantic */
-  --green-50:  #f0fdf4;
-  --green-500: #22c55e;
-  --green-600: #16a34a;
-  --yellow-50:  #fefce8;
-  --yellow-500: #eab308;
-  --yellow-600: #ca8a04;
-  --red-50:   #fef2f2;
-  --red-500:  #ef4444;
-  --red-600:  #dc2626;
-  --blue-50:  #eff6ff;
-  --blue-500: #3b82f6;
-  --purple-50:  #faf5ff;
-  --purple-500: #a855f7;
+  --green-50:  #f0fdf4; --green-500: #22c55e; --green-600: #16a34a;
+  --yellow-50: #fefce8; --yellow-500: #eab308; --yellow-600: #ca8a04;
+  --red-50:   #fef2f2; --red-500: #ef4444;   --red-600: #dc2626;
+  --blue-50:  #eff6ff; --blue-500: #3b82f6;
+  --purple-50: #faf5ff; --purple-500: #a855f7;
 
-  /* Sidebar */
-  --sidebar-w: 256px;
-  --sidebar-bg: var(--gray-900);
-  --sidebar-hover: rgba(255,255,255,0.06);
-  --sidebar-active: var(--brand-600);
+  --sidebar-w:      256px;
+  --sidebar-bg:     var(--gray-900);
+  --sidebar-hover:  rgba(255,255,255,0.06);
+  --topbar-h:       56px;
 
-  /* Surfaces */
-  --surface: var(--gray-0);
-  --surface-2: var(--gray-50);
-  --border: var(--gray-200);
+  --surface:  var(--gray-0);
+  --border:   var(--gray-200);
 
-  /* Shadow */
   --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
   --shadow-md: 0 4px 16px rgba(0,0,0,.08);
   --shadow-lg: 0 20px 60px rgba(0,0,0,.16);
 
-  /* Radius */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 16px;
 
-  /* Typography */
   --font-ui:      'Inter', sans-serif;
   --font-display: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   font-family: var(--font-ui);
   background: var(--gray-100);
@@ -77,6 +61,24 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+button  { cursor: pointer; border: none; background: none; font-family: inherit; }
 input, select, textarea { font-family: inherit; }
 ul { list-style: none; }
+
+/* Material Symbols — global utility (used via className="material-symbols-rounded") */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-300); }
