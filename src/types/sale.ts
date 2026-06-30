@@ -1,3 +1,5 @@
+export type SaleStatus = 'PENDING' | 'COMPLETED' | 'CANCELED';
+
 export interface SaleItem {
   id: string;
   productId: string;
@@ -17,7 +19,7 @@ export interface Sale {
   paymentMethod: string;
   saleDate: string;
   totalAmount: number;
-  status: string;
+  status: SaleStatus;
   items: SaleItem[];
 }
 
@@ -31,4 +33,24 @@ export interface SalePayload {
   sellerId: string;
   paymentMethodId: string;
   items: SalePayloadItem[];
+}
+
+export function mapSaleStatus(status: string) {
+  if (status === 'PENDING') {
+    return 'Pendente';
+  }
+
+  if (status === 'COMPLETED') {
+    return 'Concluída';
+  }
+
+  if (status === 'CANCELED') {
+    return 'Cancelada';
+  }
+
+  return status;
+}
+
+export function canCancelSale(status: string) {
+  return status === 'PENDING' || status === 'COMPLETED';
 }

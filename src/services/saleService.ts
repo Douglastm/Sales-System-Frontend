@@ -18,7 +18,7 @@ class SaleService {
   }
 
   async cancel(id: string): Promise<void> {
-    await api.patch(`/v1/sales/${id}/cancel`);
+    await api.patch(`/v1/sales/${id}/cancel`, {});
   }
 }
 

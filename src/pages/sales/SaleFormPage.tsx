@@ -7,7 +7,7 @@ import CustomerService from '../../services/customerService';
 import UserService from '../../services/userService';
 import ProductService from '../../services/productService';
 import PaymentMethodService from '../../services/paymentMethodService';
-import type { Sale, SalePayload } from '../../types/sale';
+import { canCancelSale, mapSaleStatus, type Sale, type SalePayload, type SaleStatus } from '../../types/sale';
 import type { CustomerRequest } from '../../types/customerRequest';
 import type { User } from '../../types/user';
 import type { Product } from '../../types/product';
@@ -27,7 +27,7 @@ type SaleFormState = {
   sellerId: string;
   paymentMethodId: string;
   saleDate: string;
-  status: string;
+  status: SaleStatus | '';
   items: SaleFormItem[];
 };
 
@@ -318,7 +318,7 @@ const SaleFormPage: React.FC = () => {
 
         <div className={styles.footer}>
           <button type="button" className={shared.btnGhost} onClick={() => navigate('/sales/orders')}>Fechar</button>
-          {!isNew && sale.status !== 'CANCELED' && (
+          {!isNew && canCancelSale(sale.status) && (
             <button type="button" className={shared.btnDanger} onClick={() => void handleCancelSale()} disabled={submitting}>
               <span className="material-symbols-rounded">close</span>
               {submitting ? 'Cancelando...' : 'Cancelar Venda'}
@@ -362,18 +362,6 @@ function getSaleTotal(items: SaleFormItem[], products: Product[]) {
 
     return sum + product.price * quantity;
   }, 0);
-}
-
-function mapSaleStatus(status: string) {
-  if (status === 'CONFIRMED') {
-    return 'Confirmada';
-  }
-
-  if (status === 'CANCELED') {
-    return 'Cancelada';
-  }
-
-  return status;
 }
 
 function formatDate(value: string) {

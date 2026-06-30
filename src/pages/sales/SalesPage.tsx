@@ -8,7 +8,7 @@ import Modal from '../../components/ui/Modal';
 import type { Column, TableAction } from '../../types';
 import shared from '../../components/ui/shared.module.css';
 import SaleService from '../../services/saleService';
-import type { Sale } from '../../types/sale';
+import { canCancelSale, mapSaleStatus, type Sale } from '../../types/sale';
 
 const SalesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -88,7 +88,13 @@ const SalesPage: React.FC = () => {
       label: 'Cancelar',
       icon: 'close',
       variant: 'danger',
-      onClick: (row) => setCancelModal({ open: true, item: row }),
+      onClick: (row) => {
+        if (!canCancelSale(row.status)) {
+          return;
+        }
+
+        setCancelModal({ open: true, item: row });
+      },
     },
   ];
 
@@ -118,7 +124,7 @@ const SalesPage: React.FC = () => {
           <p>Cancelar a venda <strong>{cancelModal.item?.id}</strong>?</p>
           <div className={shared.confirmActions}>
             <button type="button" className={shared.btnGhost} onClick={() => setCancelModal({ open: false })}>Fechar</button>
-            <button type="button" className={shared.btnDanger} onClick={() => void handleCancelSale()}>
+            <button type="button" className={shared.btnDanger} onClick={() => void handleCancelSale()} disabled={!cancelModal.item || !canCancelSale(cancelModal.item.status)}>
               <span className="material-symbols-rounded">close</span>
               Cancelar Venda
             </button>
@@ -128,18 +134,6 @@ const SalesPage: React.FC = () => {
     </>
   );
 };
-
-function mapSaleStatus(status: string) {
-  if (status === 'CONFIRMED') {
-    return 'Confirmada';
-  }
-
-  if (status === 'CANCELED') {
-    return 'Cancelada';
-  }
-
-  return status;
-}
 
 function formatDate(value: string) {
   const date = new Date(value);
