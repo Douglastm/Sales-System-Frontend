@@ -1,0 +1,20 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 7px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 13px !important;
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24 !important;
+}
+
+.green  { background: var(--green-50);  color: var(--green-600);  }
+.gray   { background: var(--gray-100);  color: var(--gray-500);   }
+.yellow { background: var(--yellow-50); color: var(--yellow-600); }
+.red    { background: var(--red-50);    color: var(--red-600);    }
